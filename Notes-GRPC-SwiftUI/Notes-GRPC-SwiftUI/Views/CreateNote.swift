@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateNote: View {
     @State private var title: String = ""
     @State private var content: String = ""
+    @State private var selectedShow: TVShow?
     @Environment(\.presentationMode) var presentationMode
     
     let dataRepository = DataRepository.shared
@@ -45,12 +46,21 @@ struct CreateNote: View {
         }
         .background(Color(white: 0.9))
         .navigationTitle("Criar uma nova Nota")
+        .alert(item: $selectedShow) { show in
+            Alert(title: Text(show.name),
+                  message: Text(show.mensagem),
+                  dismissButton: .cancel())
+        }
     }
     
     func insertNote() {
         let note = Note(title: title, content: content)
         dataRepository.insertNote(note: note) { (note, error) in
-            guard note != nil else { return }
+            guard note != nil else {
+                selectedShow = TVShow(name: "Erro",
+                                      mensagem: error?.localizedDescription ?? "")
+                return
+            }
             self.presentationMode.wrappedValue.dismiss()
         }
     }

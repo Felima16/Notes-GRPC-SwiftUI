@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NotesList: View {
-    @State private var showAlert = false
+    @State private var selectedShow: TVShow?
     @State var notes = [Note]()
     
     let dataRepository = DataRepository.shared
@@ -24,7 +24,18 @@ struct NotesList: View {
             .onAppear() {
                 dataRepository.listNotes { (notes, error) in
                     if let notes = notes {
-                        self.notes = notes
+                        if notes.count > 0 {
+                            self.notes = notes
+                        } else {
+                            selectedShow = TVShow(
+                                name: "Aviso",
+                                mensagem: "Não tem nenhuma nota cadastrada")
+                        }
+                    }
+                    if let error = error {
+                        selectedShow = TVShow(
+                            name: "Erro",
+                            mensagem: error.localizedDescription)
                     }
                 }
             }
@@ -38,6 +49,11 @@ struct NotesList: View {
                 }
             })
         }
+        .alert(item: $selectedShow) { show in
+            Alert(title: Text(show.name),
+                  message: Text(show.mensagem),
+                  dismissButton: .cancel())
+        }
     }
     
     func delete(at offsets: IndexSet) {
@@ -47,6 +63,9 @@ struct NotesList: View {
             dataRepository.delete(noteId: note.id) { (isDeleted) in
                 if isDeleted {
                     notes.remove(at: index)
+                } else {
+                    selectedShow = TVShow(name: "Erro",
+                                          mensagem: "Não foi possivel remover a nota")
                 }
             }
         }
@@ -58,4 +77,10 @@ struct NotesList_Previews: PreviewProvider {
     static var previews: some View {
         NotesList()
     }
+}
+
+struct TVShow: Identifiable {
+    var id: String { name }
+    let name: String
+    let mensagem: String
 }
