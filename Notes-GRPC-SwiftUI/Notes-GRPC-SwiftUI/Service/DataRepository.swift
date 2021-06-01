@@ -75,11 +75,42 @@ class DataRepository {
             print("Error for get Request:\(error)")
         }
     }
+    
+    func delete(noteId: String, completion: @escaping(Bool) -> ()) {
+        do {
+            let delete = client.delete(NoteRequestId(id: noteId))
+            
+            delete.response.whenSuccess { _ in
+                DispatchQueue.main.async {
+                    completion(true)
+                }
+            }
+            
+            delete.response.whenFailure { _ in
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+            }
+            
+            let detailsStatus = try delete.status.wait()
+            print("Staus:::\(detailsStatus) \n \(detailsStatus.code)")
+
+            
+        } catch {
+            print("Error for get Request:\(error)")
+        }
+    }
 }
 
 extension Note {
     init(title: String, content: String) {
         self.title = title
         self.content = content
+    }
+}
+
+extension NoteRequestId {
+    init(id: String) {
+        self.id = id
     }
 }

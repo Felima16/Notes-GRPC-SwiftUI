@@ -15,8 +15,11 @@ struct NotesList: View {
     
     var body: some View {
         NavigationView {
-            List(notes, id: \.self) { note in
-                NoteRow(note: note)
+            List {
+                ForEach(notes, id: \.self) { note in
+                    NoteRow(note: note)
+                }
+                .onDelete(perform: delete(at:))
             }
             .onAppear() {
                 dataRepository.listNotes { (notes, error) in
@@ -35,6 +38,19 @@ struct NotesList: View {
                 }
             })
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        print("offsets \(offsets.first!)")
+        if let index = offsets.first {
+            let note = notes[index]
+            dataRepository.delete(noteId: note.id) { (isDeleted) in
+                if isDeleted {
+                    notes.remove(at: index)
+                }
+            }
+        }
+        
     }
 }
 
