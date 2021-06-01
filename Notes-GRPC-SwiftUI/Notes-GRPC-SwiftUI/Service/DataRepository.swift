@@ -31,11 +31,19 @@ class DataRepository {
     
     // MARK: - Handle functions
     
-    func listNotes(completion: @escaping([Note]) -> Void) {
+    func listNotes(completion: @escaping([Note]?, Error?) -> Void) {
         do {
             let list = client.list(Empty())
             list.response.whenSuccess { (notes) in
-                completion(notes.notes)
+                DispatchQueue.main.async {
+                    completion(notes.notes, nil)
+                }
+            }
+            
+            list.response.whenFailure { (error) in
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
             }
             
             let detailsStatus = try list.status.wait()
@@ -43,5 +51,35 @@ class DataRepository {
         } catch {
             print("Error for get Request:\(error)")
         }
+    }
+    
+    func insertNote(note: Note, completion: @escaping(Note?, Error?) -> Void) {
+        do {
+            let insert = client.insert(note)
+            
+            insert.response.whenSuccess { (note) in
+                DispatchQueue.main.async {
+                    completion(note, nil)
+                }
+            }
+            
+            insert.response.whenFailure { (error) in
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+            
+            let detailsStatus = try insert.status.wait()
+            print("Staus:::\(detailsStatus) \n \(detailsStatus.code)")
+        } catch {
+            print("Error for get Request:\(error)")
+        }
+    }
+}
+
+extension Note {
+    init(title: String, content: String) {
+        self.title = title
+        self.content = content
     }
 }

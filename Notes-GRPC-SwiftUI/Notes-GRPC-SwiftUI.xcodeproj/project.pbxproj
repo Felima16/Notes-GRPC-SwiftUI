@@ -18,6 +18,9 @@
 		6D014CF626652575007CB0EB /* notes.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014CF426652575007CB0EB /* notes.grpc.swift */; };
 		6D014CF726652575007CB0EB /* notes.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014CF526652575007CB0EB /* notes.pb.swift */; };
 		6D014CFB26652750007CB0EB /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014CFA26652750007CB0EB /* DataRepository.swift */; };
+		6D014D052665734C007CB0EB /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014D042665734C007CB0EB /* NoteRow.swift */; };
+		6D014D09266575A6007CB0EB /* NotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014D08266575A6007CB0EB /* NotesList.swift */; };
+		6D014D0D266597BE007CB0EB /* CreateNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014D0C266597BE007CB0EB /* CreateNote.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		6D014CF426652575007CB0EB /* notes.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notes.grpc.swift; sourceTree = "<group>"; };
 		6D014CF526652575007CB0EB /* notes.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notes.pb.swift; sourceTree = "<group>"; };
 		6D014CFA26652750007CB0EB /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
+		6D014D042665734C007CB0EB /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
+		6D014D08266575A6007CB0EB /* NotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesList.swift; sourceTree = "<group>"; };
+		6D014D0C266597BE007CB0EB /* CreateNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNote.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,10 +72,10 @@
 		6D014CD726625ABC007CB0EB /* Notes-GRPC-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				6D014CFD266572A8007CB0EB /* Views */,
 				6D014CF92665272E007CB0EB /* Service */,
 				6D014CD826625ABC007CB0EB /* AppDelegate.swift */,
 				6D014CDA26625ABC007CB0EB /* SceneDelegate.swift */,
-				6D014CDC26625ABC007CB0EB /* ContentView.swift */,
 				6D014CDE26625ABD007CB0EB /* Assets.xcassets */,
 				6D014CE326625ABD007CB0EB /* LaunchScreen.storyboard */,
 				6D014CE626625ABD007CB0EB /* Info.plist */,
@@ -102,6 +108,17 @@
 				6D014CFA26652750007CB0EB /* DataRepository.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		6D014CFD266572A8007CB0EB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6D014CDC26625ABC007CB0EB /* ContentView.swift */,
+				6D014D042665734C007CB0EB /* NoteRow.swift */,
+				6D014D08266575A6007CB0EB /* NotesList.swift */,
+				6D014D0C266597BE007CB0EB /* CreateNote.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,8 +201,11 @@
 				6D014CD926625ABC007CB0EB /* AppDelegate.swift in Sources */,
 				6D014CDB26625ABC007CB0EB /* SceneDelegate.swift in Sources */,
 				6D014CF626652575007CB0EB /* notes.grpc.swift in Sources */,
+				6D014D0D266597BE007CB0EB /* CreateNote.swift in Sources */,
+				6D014D09266575A6007CB0EB /* NotesList.swift in Sources */,
 				6D014CFB26652750007CB0EB /* DataRepository.swift in Sources */,
 				6D014CF726652575007CB0EB /* notes.pb.swift in Sources */,
+				6D014D052665734C007CB0EB /* NoteRow.swift in Sources */,
 				6D014CDD26625ABC007CB0EB /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
